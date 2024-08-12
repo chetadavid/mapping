@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+//mapping
+//how to declare a mapping (simple and nested)
+// set get delete
+
+contract Mapping {
+    mapping (address => uint) public balances; //simple mapping
+    mapping (address => mapping (address => bool)) public isFriend; //nested mapping
+
+    function examples() external  {
+        balances[msg.sender] = 123;
+        uint bal = balances[msg.sender];
+        uint bal2 = balances[address(1)]; //this will return 0 cos the default value is 0
+
+        //updating the mapping
+        balances[msg.sender] += 456; // the + sign there means its adding 456 to the main balance of msg.sender which is 123. that is 123 + 456 = 579
+
+        //use delete to clesr a keyword stored in the mapping
+        delete balances[msg.sender]; // the default value of uint is 0
+
+        //using the nested mapping isFriend
+        isFriend[msg.sender][address(this)] = true;
+    }
+}
